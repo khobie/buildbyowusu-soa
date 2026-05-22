@@ -72,7 +72,12 @@ Repo: [github.com/khobie/buildbyowusu-soa](https://github.com/khobie/buildbyowus
 3. Wait for the web service and **ridge-db** PostgreSQL to deploy
 4. Open your site URL (e.g. `https://ridge-anaesthesia.onrender.com`)
 
-The blueprint runs `init-db` and `seed` on each release (safe to re-run).
+5. **Shell** (required on free tier — pre-deploy commands are not supported):
+
+```bash
+flask --app run init-db
+flask --app run seed
+```
 
 ### Option B — Manual Web Service
 
