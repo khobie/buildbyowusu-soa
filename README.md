@@ -63,12 +63,42 @@ school_anaesthesia/
 
 ## Deploy to Render
 
-1. Push to GitHub
-2. Create Web Service on Render, connect repo
-3. Set `FLASK_CONFIG=production`, `SECRET_KEY`, `DATABASE_URL`
-4. Build: `pip install -r requirements.txt`
-5. Start: `gunicorn run:app`
-6. Run `flask init-db` and `flask seed` via Render shell
+Repo: [github.com/khobie/buildbyowusu-soa](https://github.com/khobie/buildbyowusu-soa)
+
+### Option A — Blueprint (recommended)
+
+1. Sign in at [render.com](https://render.com) → **New** → **Blueprint**
+2. Connect **khobie/buildbyowusu-soa** and apply `render.yaml`
+3. Wait for the web service and **ridge-db** PostgreSQL to deploy
+4. Open your site URL (e.g. `https://ridge-anaesthesia.onrender.com`)
+
+The blueprint runs `init-db` and `seed` on each release (safe to re-run).
+
+### Option B — Manual Web Service
+
+1. **New** → **Web Service** → connect the GitHub repo
+2. **Runtime:** Python 3 · **Build:** `pip install -r requirements.txt`
+3. **Start:** `gunicorn run:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120`
+4. **New** → **PostgreSQL** (free), copy **Internal Database URL**
+5. Environment variables:
+
+| Key | Value |
+|-----|--------|
+| `FLASK_CONFIG` | `production` |
+| `SECRET_KEY` | (generate a long random string) |
+| `DATABASE_URL` | (paste Postgres URL from step 4) |
+
+6. **Shell** (first deploy only):
+
+```bash
+flask --app run init-db
+flask --app run seed
+```
+
+### After deploy
+
+- **Admin:** `admin@ridgeanaesthesia.edu` / `Admin@2024!` — change the password immediately
+- Free tier sleeps after inactivity; first visit may take ~30s to wake
 
 ## Environment Variables
 

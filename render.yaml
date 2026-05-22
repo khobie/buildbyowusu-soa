@@ -1,19 +1,33 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# Deploy: Dashboard → New → Blueprint → connect github.com/khobie/buildbyowusu-soa
+
 services:
   - type: web
     name: ridge-anaesthesia
     runtime: python
+    plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn run:app --bind 0.0.0.0:$PORT
+    startCommand: gunicorn run:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    releaseCommand: flask --app run init-db && flask --app run seed
+    healthCheckPath: /
     envVars:
       - key: FLASK_CONFIG
         value: production
+      - key: PYTHON_VERSION
+        value: "3.12.7"
       - key: SECRET_KEY
         generateValue: true
       - key: DATABASE_URL
         fromDatabase:
           name: ridge-db
           property: connectionString
+      - key: LIBRARY_URL
+        value: https://soal.librarika.com/
+      - key: STUDENT_PORTAL_URL
+        value: https://soa.edu.gh/portal/login
 
 databases:
   - name: ridge-db
     plan: free
+    databaseName: ridge_anaesthesia
+    user: ridge

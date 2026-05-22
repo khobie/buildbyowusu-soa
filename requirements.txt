@@ -12,6 +12,6 @@ qrcode>=7.4
 Pillow>=10.0.0
 itsdangerous>=2.2.0
 Werkzeug>=3.0.0
+psycopg2-binary>=2.9.9
 
-# Production PostgreSQL (Render): pip install psycopg2-binary
 # PDF export (optional): pip install reportlab
