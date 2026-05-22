@@ -82,4 +82,9 @@ def create_app(config_name=None):
         from flask import render_template
         return render_template('errors/403.html'), 403
 
+    if app.config.get('INIT_DB_ON_STARTUP'):
+        with app.app_context():
+            from app.utils.deploy import ensure_database
+            ensure_database()
+
     return app

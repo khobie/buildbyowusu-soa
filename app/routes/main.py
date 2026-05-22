@@ -11,6 +11,12 @@ import secrets
 main_bp = Blueprint('main', __name__)
 
 
+@main_bp.route('/health')
+def health():
+    """Lightweight health check for Render (no database required)."""
+    return {'status': 'ok'}, 200
+
+
 @main_bp.route('/')
 def index():
     programmes = Programme.query.filter_by(is_featured=True).limit(4).all()
