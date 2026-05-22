@@ -8,7 +8,7 @@ services:
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn run:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
-    releaseCommand: flask --app run init-db && flask --app run seed
+    preDeployCommand: flask --app run init-db && flask --app run seed
     healthCheckPath: /
     envVars:
       - key: FLASK_CONFIG
