@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ programme.name }} — {{ school_name }}{% endblock %}
+{% block content %}
+<section class="py-5 bg-medical text-white"><div class="container py-4"><h1>{{ programme.name }}</h1><p class="mb-0 opacity-75">{{ programme.level }} · {{ programme.duration }}</p></div></section>
+<section class="py-5"><div class="container"><div class="row g-4">
+<div class="col-lg-8">
+    <div class="glass-card p-4 mb-4"><h4>Overview</h4><p>{{ programme.description }}</p></div>
+    <div class="glass-card p-4 mb-4"><h4>Curriculum</h4><p>{{ programme.curriculum or 'Contact admissions for full curriculum.' }}</p></div>
+    <div class="glass-card p-4"><h4>Clinical Rotation Structure</h4><p>{{ programme.clinical_structure or 'Structured rotations across partner hospitals.' }}</p></div>
+</div>
+<div class="col-lg-4">
+    <div class="glass-card p-4 sticky-top" style="top:80px">
+        <h5>Quick Facts</h5>
+        <ul class="list-unstyled">
+            <li class="mb-2"><strong>Code:</strong> {{ programme.code }}</li>
+            <li class="mb-2"><strong>Duration:</strong> {{ programme.duration }}</li>
+            <li class="mb-2"><strong>Tuition:</strong> {{ programme.tuition_fee }}</li>
+        </ul>
+        <h6>Entry Requirements</h6>
+        <p class="small">{{ programme.entry_requirements }}</p>
+        <a href="{{ url_for('main.admissions') }}" class="btn btn-emerald w-100">Apply Now</a>
+    </div>
+</div>
+</div></div></section>
+{% endblock %}

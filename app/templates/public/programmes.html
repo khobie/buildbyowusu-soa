@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Programmes — {{ school_name }}{% endblock %}
+{% block content %}
+<section class="py-5 bg-medical text-white"><div class="container py-4 text-center"><span class="hero-badge ucc-hero-badge mb-3 d-inline-block"><i class="fas fa-university me-1"></i> {{ school_affiliation_short }}</span><h1 class="display-5 fw-bold">BSc in Anaesthesia</h1><p class="lead opacity-75 mb-0">The only programme we offer · {{ school_affiliation }}</p></div></section>
+<section class="py-5"><div class="container"><div class="row g-4">
+{% for prog in programmes %}
+<div class="col-lg-6" data-aos="fade-up">
+    <div class="card glass-card border-0 h-100 programme-card">
+        <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <div><span class="badge bg-medical">{{ prog.level }}</span><h4 class="mt-2">{{ prog.name }}</h4></div>
+                <span class="text-muted"><i class="fas fa-clock me-1"></i>{{ prog.duration }}</span>
+            </div>
+            <p>{{ prog.description }}</p>
+            <hr id="curriculum">
+            <h6>Curriculum</h6>
+            <p class="small text-muted">{{ prog.curriculum or 'See programme detail for full curriculum.' }}</p>
+            <h6 id="requirements">Entry Requirements</h6>
+            <p class="small text-muted">{{ prog.entry_requirements }}</p>
+            <h6>Tuition</h6>
+            <p class="small"><strong>{{ prog.tuition_fee }}</strong></p>
+            <a href="{{ url_for('main.programme_detail', id=prog.id) }}" class="btn btn-medical">Full Curriculum</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div></div></section>
+{% endblock %}

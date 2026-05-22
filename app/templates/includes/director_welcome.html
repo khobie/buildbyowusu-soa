@@ -1,0 +1,28 @@
+<section class="py-5 bg-white border-top border-bottom" id="director-welcome" style="border-color:rgba(5,150,105,0.12)!important">
+    <div class="container">
+        <div class="row g-3 g-lg-4 align-items-center">
+            <div class="col-md-5 col-lg-5 text-center" data-aos="fade-right">
+                <img src="{{ url_for('static', filename=site_images.director) }}"
+                     alt="{{ director_name }}"
+                     class="director-photo rounded-4 d-block mx-auto">
+                <h4 class="text-medical mt-4 mb-1">{{ director_name }}</h4>
+                <p class="text-muted mb-2">{{ director_title }}</p>
+                <span class="badge bg-medical">Director's Welcome</span>
+            </div>
+            <div class="col-md-7 col-lg-7" data-aos="fade-left">
+                <h2 class="section-title mb-3">Director's Welcome Address</h2>
+                <p class="text-muted fst-italic mb-4">A message from the leadership of {{ school_name }}</p>
+                <div class="director-welcome-text">
+                    {% for paragraph in director_welcome.split('\n\n') %}
+                    {% if paragraph.strip() %}
+                    <p class="mb-3">{{ paragraph.strip() }}</p>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <p class="mb-0 fw-semibold text-medical">— {{ director_name }}<br>
+                    <small class="text-muted fw-normal">{{ director_title }}, {{ school_name }}</small>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

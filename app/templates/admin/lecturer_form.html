@@ -1,0 +1,4 @@
+{% extends "admin/dashboard.html" %}
+{% block portal_content %}<h2>{{ title }}</h2><div class="glass-card p-4 col-lg-8 mt-3"><form method="POST">{{ form.hidden_tag() }}
+{% for field in form %}{% if field.type != 'CSRFToken' and field.type != 'SubmitField' %}<div class="mb-3"><label>{{ field.label.text }}</label>{{ field(class="form-control") }}</div>{% endif %}{% endfor %}
+{{ form.submit(class="btn btn-medical") }}</form></div>{% endblock %}

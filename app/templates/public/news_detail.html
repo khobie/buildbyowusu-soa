@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block content %}
+<section class="py-5"><div class="container col-lg-8">
+    <div class="glass-card p-5">
+        <h1>{{ article.title }}</h1>
+        <small class="text-muted">{{ article.created_at.strftime('%d %B %Y') }}</small>
+        <hr><div class="article-content">{{ article.content }}</div>
+    </div>
+</div></section>
+{% endblock %}

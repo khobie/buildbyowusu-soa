@@ -1,0 +1,30 @@
+{% extends "portal_base.html" %}
+{% block sidebar %}
+<ul class="nav flex-column">
+    <li class="nav-item"><a class="nav-link active" href="{{ url_for('student.dashboard') }}"><i class="fas fa-home me-2"></i>Dashboard</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('student.profile') }}"><i class="fas fa-user me-2"></i>Profile</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('student.results') }}"><i class="fas fa-chart-bar me-2"></i>Results</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('student.timetable') }}"><i class="fas fa-calendar me-2"></i>Timetable</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('student.materials') }}"><i class="fas fa-book me-2"></i>Materials</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('student.assignments') }}"><i class="fas fa-tasks me-2"></i>Assignments</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('student.clinical') }}"><i class="fas fa-hospital me-2"></i>Clinical</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('student.announcements') }}"><i class="fas fa-bullhorn me-2"></i>Announcements</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('student.id_card') }}"><i class="fas fa-id-card me-2"></i>ID Card</a></li>
+</ul>
+{% endblock %}
+{% block portal_content %}
+<h2 class="mb-4">Welcome, {{ current_user.first_name }}!</h2>
+<div class="row g-3 mb-4">
+    <div class="col-md-4"><div class="dash-widget blue"><h3>{{ student.student_id }}</h3><p class="mb-0 opacity-75">Student ID</p></div></div>
+    <div class="col-md-4"><div class="dash-widget green"><h3>Year {{ student.year_of_study }}</h3><p class="mb-0 opacity-75">Current Year</p></div></div>
+    <div class="col-md-4"><div class="dash-widget dark"><h3>{{ student.programme.name if student.programme else 'N/A' }}</h3><p class="mb-0 opacity-75">Programme</p></div></div>
+</div>
+<div class="row g-4">
+    <div class="col-lg-6"><div class="glass-card p-4"><h5>Announcements</h5>
+        {% for a in announcements %}<div class="border-bottom py-2"><strong>{{ a.title }}</strong><p class="small mb-0">{{ a.content[:80] }}...</p></div>{% else %}<p class="text-muted small">No announcements.</p>{% endfor %}
+    </div></div>
+    <div class="col-lg-6"><div class="glass-card p-4"><h5>Clinical Postings</h5>
+        {% for p in postings %}<div class="border-bottom py-2"><strong>{{ p.hospital_name }}</strong><span class="badge bg-secondary ms-1">{{ p.posting_type }}</span><p class="small mb-0">{{ p.start_date }} — {{ p.end_date }}</p></div>{% else %}<p class="text-muted small">No postings scheduled.</p>{% endfor %}
+    </div></div>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}About — {{ school_name }}{% endblock %}
+{% block content %}
+<section class="py-5 bg-medical text-white">
+    <div class="container py-4 text-center">
+        <h1 class="display-5 fw-bold" data-aos="fade-up">About Ridge School</h1>
+        <p class="lead opacity-75" data-aos="fade-up">{{ school_affiliation_short }} · Excellence Since 2008</p>
+    </div>
+</section>
+
+{% include 'includes/director_welcome.html' %}
+
+<section class="py-5" id="history">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <h2 class="section-title">Our History</h2>
+                <p>Ridge School of Anaesthesia was established in 2008 as a specialist training institution within the Ridge Medical Centre campus. We offer a single flagship qualification: the BSc in Anaesthesia — a four-year programme combining academic excellence with immersive clinical training.</p>
+                <p>Over 1,200 graduates have passed through our doors, now serving in hospitals across Ghana and West Africa.</p>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left" id="mission">
+                <div class="row g-3">
+                    <div class="col-md-6"><div class="glass-card p-4"><h5 class="text-medical"><i class="fas fa-bullseye me-2"></i>Mission</h5><p class="small mb-0">To train competent, ethical anaesthesia practitioners through excellence in education and clinical practice.</p></div></div>
+                    <div class="col-md-6"><div class="glass-card p-4"><h5 class="text-medical"><i class="fas fa-eye me-2"></i>Vision</h5><p class="small mb-0">To be West Africa's leading centre of excellence in anaesthesia education and research.</p></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5 bg-light" id="administration">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge bg-medical mb-2">Management</span>
+            <h2 class="section-title">Administration</h2>
+            <p class="section-subtitle mx-auto">The leadership team that supports admissions, finance, academics, and student services.</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            {% for member in administration %}
+            <div class="col-sm-6 col-lg-4 col-xl" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 50 }}">
+                {% include 'includes/staff_card.html' %}
+            </div>
+            {% else %}
+            <p class="text-muted text-center">Administration team information coming soon.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="py-5" id="leadership">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge bg-emerald mb-2" style="background:#10B981">Teaching Staff</span>
+            <h2 class="section-title">Academic Faculty</h2>
+            <p class="section-subtitle mx-auto">Consultant anaesthetists and lecturers who deliver the BSc in Anaesthesia programme.</p>
+        </div>
+        <div class="row g-4">
+            {% for member in faculty %}
+            <div class="col-md-6 col-lg-3" data-aos="fade-up">
+                {% include 'includes/staff_card.html' %}
+            </div>
+            {% else %}
+            <p class="text-muted text-center">Faculty profiles coming soon.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="py-5" id="partners">
+    <div class="container">
+        <h2 class="section-title text-center mb-4">Partner Hospitals</h2>
+        <div class="row g-3 justify-content-center">
+            {% for p in partners %}
+            <div class="col-md-3"><div class="partner-logo text-center">{{ p.name }}</div></div>
+            {% endfor %}
+        </div>
+        <div class="row g-4 mt-4">
+            <div class="col-md-4" data-aos="fade-up"><div class="glass-card p-4 text-center"><div class="stat-number">17+</div><p class="mb-0">Years of Excellence</p></div></div>
+            <div class="col-md-4" data-aos="fade-up"><div class="glass-card p-4 text-center"><div class="stat-number">1200+</div><p class="mb-0">Graduates</p></div></div>
+            <div class="col-md-4" data-aos="fade-up"><div class="glass-card p-4 text-center"><div class="stat-number">95%</div><p class="mb-0">Employment Rate</p></div></div>
+        </div>
+    </div>
+</section>
+{% endblock %}

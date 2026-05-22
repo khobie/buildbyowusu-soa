@@ -1,0 +1,16 @@
+{% extends "student/dashboard.html" %}
+{% block portal_content %}
+<h2>Student ID Card</h2>
+<div class="id-card-preview mx-auto mt-4" style="background:linear-gradient(135deg,#047857,#10B981);color:white;padding:2rem">
+    <div class="d-flex justify-content-between align-items-start mb-4">
+        <div><div class="brand-icon"><i class="fas fa-heartbeat"></i></div><small>Ridge School of Anaesthesia</small><br><small class="opacity-75">{{ school_affiliation_short }}</small></div>
+        {% if student.qr_code_path %}<img src="{{ url_for('static', filename=student.qr_code_path) }}" width="80" alt="QR">{% endif %}
+    </div>
+    <h4>{{ current_user.full_name }}</h4>
+    <p class="mb-1">{{ student.student_id }}</p>
+    <p class="small opacity-75">{{ student.programme.name if student.programme else '' }} · Year {{ student.year_of_study }}</p>
+    <hr style="border-color:rgba(255,255,255,0.3)">
+    <small>Valid {{ current_year }}/{{ current_year + 1 }} Academic Year</small>
+</div>
+<p class="text-center text-muted mt-3 small">Scan QR code for identity verification</p>
+{% endblock %}

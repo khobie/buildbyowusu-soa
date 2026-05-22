@@ -1,0 +1,241 @@
+{# Premium navbar — Ridge School of Anaesthesia #}
+<div id="scrollProgress" class="scroll-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Page scroll progress"></div>
+
+<header class="premium-navbar-wrapper" id="premiumNavbarWrapper">
+    <nav class="premium-navbar navbar navbar-expand-xl" id="mainNav" aria-label="Main navigation">
+        <div class="container-fluid premium-nav-container">
+            <!-- Brand -->
+            <a class="premium-brand" href="{{ url_for('main.index') }}" aria-label="{{ school_name }} home">
+                <div class="premium-brand-icon premium-brand-icon--logo" aria-hidden="true">
+                    {% include 'includes/brand_logo.html' %}
+                </div>
+                <div class="premium-brand-text">
+                    <span class="premium-brand-name">Ridge School of Anaesthesia</span>
+                    <span class="premium-brand-motto">{{ school_motto }}</span>
+                    <span class="premium-brand-ucc"><i class="fas fa-university"></i> {{ school_affiliation_short }}</span>
+                </div>
+            </a>
+
+            <!-- Desktop menu -->
+            <div class="premium-nav-center d-none d-xl-flex" role="menubar">
+                <ul class="premium-menu">
+                    <li class="premium-menu-item" role="none">
+                        <a class="premium-nav-link {% if request.endpoint == 'main.index' %}is-active{% endif %}"
+                           href="{{ url_for('main.index') }}" role="menuitem">Home</a>
+                    </li>
+
+                    <li class="premium-menu-item has-dropdown" role="none">
+                        <button class="premium-nav-link premium-dropdown-toggle {% if request.endpoint == 'main.about' %}is-active{% endif %}"
+                                type="button" aria-expanded="false" aria-haspopup="true" data-dropdown="about">
+                            About <i class="fas fa-chevron-down ms-1 dropdown-chevron" aria-hidden="true"></i>
+                        </button>
+                        <div class="premium-dropdown mega-dropdown" id="dropdown-about" role="menu">
+                            <div class="mega-dropdown-inner">
+                                <div class="mega-col">
+                                    <h6>About Us</h6>
+                                    <a href="{{ url_for('main.about') }}#director-welcome" role="menuitem"><i class="fas fa-comment-dots"></i> Director's Welcome</a>
+                                    <a href="{{ url_for('main.about') }}#history" role="menuitem"><i class="fas fa-landmark"></i> History</a>
+                                    <a href="{{ url_for('main.about') }}#mission" role="menuitem"><i class="fas fa-bullseye"></i> Mission &amp; Vision</a>
+                                    <a href="{{ url_for('main.about') }}#administration" role="menuitem"><i class="fas fa-briefcase"></i> Administration</a>
+                                    <a href="{{ url_for('main.about') }}#leadership" role="menuitem"><i class="fas fa-chalkboard-teacher"></i> Academic Faculty</a>
+                                </div>
+                                <div class="mega-col">
+                                    <h6>Partnerships</h6>
+                                    <a href="{{ url_for('main.about') }}#partners" role="menuitem"><i class="fas fa-hospital"></i> Partner Hospitals</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="premium-menu-item has-dropdown" role="none">
+                        <button class="premium-nav-link premium-dropdown-toggle {% if request.endpoint in ('main.programmes', 'main.programme_detail', 'main.clinical_training') %}is-active{% endif %}"
+                                type="button" aria-expanded="false" data-dropdown="programmes">
+                            Programmes <i class="fas fa-chevron-down ms-1 dropdown-chevron" aria-hidden="true"></i>
+                        </button>
+                        <div class="premium-dropdown mega-dropdown" id="dropdown-programmes" role="menu">
+                            <div class="mega-dropdown-inner">
+                                <div class="mega-col">
+                                    <h6>Academic Programme</h6>
+                                    <a href="{{ url_for('main.programmes') }}" role="menuitem"><i class="fas fa-graduation-cap"></i> BSc in Anaesthesia</a>
+                                    <a href="{{ url_for('main.programmes') }}#curriculum" role="menuitem"><i class="fas fa-book-open"></i> Curriculum</a>
+                                    <a href="{{ url_for('main.programmes') }}#requirements" role="menuitem"><i class="fas fa-list-check"></i> Entry Requirements</a>
+                                </div>
+                                <div class="mega-col">
+                                    <h6>Clinical</h6>
+                                    <a href="{{ url_for('main.clinical_training') }}" role="menuitem"><i class="fas fa-procedures"></i> Clinical Training</a>
+                                    <a href="{{ library_url }}" role="menuitem" {% include 'includes/external_link_attrs.html' %}><i class="fas fa-book"></i> Library</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="premium-menu-item has-dropdown" role="none">
+                        <button class="premium-nav-link premium-dropdown-toggle {% if request.endpoint == 'main.admissions' %}is-active{% endif %}"
+                                type="button" aria-expanded="false" data-dropdown="admissions">
+                            Admissions <i class="fas fa-chevron-down ms-1 dropdown-chevron" aria-hidden="true"></i>
+                        </button>
+                        <div class="premium-dropdown" id="dropdown-admissions" role="menu">
+                            <a href="{{ url_for('main.admissions') }}" role="menuitem"><i class="fas fa-door-open"></i> Admissions</a>
+                            <a href="{{ url_for('main.admissions') }}#requirements" role="menuitem"><i class="fas fa-clipboard-list"></i> Admission Requirements</a>
+                            <a href="{{ url_for('main.admissions') }}#fees" role="menuitem"><i class="fas fa-coins"></i> Tuition &amp; Fees</a>
+                            <a href="{{ url_for('main.admissions') }}#how-to-apply" role="menuitem"><i class="fas fa-circle-info"></i> How to Apply</a>
+                            <a href="{{ url_for('main.brochure') }}" role="menuitem"><i class="fas fa-download"></i> Download Brochure</a>
+                        </div>
+                    </li>
+
+                    <li class="premium-menu-item" role="none">
+                        <a class="premium-nav-link premium-nav-link-portal"
+                           href="{{ student_portal_url }}"
+                           role="menuitem" {% include 'includes/external_link_attrs.html' %}>
+                            <i class="fas fa-user-graduate me-1" aria-hidden="true"></i> Student Portal
+                        </a>
+                    </li>
+
+                    <li class="premium-menu-item has-dropdown" role="none">
+                        <button class="premium-nav-link premium-dropdown-toggle {% if request.endpoint in ('main.news_events', 'main.news_list', 'main.news_detail', 'main.events', 'main.gallery') %}is-active{% endif %}"
+                                type="button" aria-expanded="false" data-dropdown="news">
+                            News &amp; Events <i class="fas fa-chevron-down ms-1 dropdown-chevron" aria-hidden="true"></i>
+                        </button>
+                        <div class="premium-dropdown mega-dropdown" id="dropdown-news" role="menu">
+                            <div class="mega-dropdown-inner">
+                                <div class="mega-col">
+                                    <a href="{{ url_for('main.news_list') }}" role="menuitem"><i class="fas fa-newspaper"></i> News</a>
+                                    <a href="{{ url_for('main.events') }}" role="menuitem"><i class="fas fa-calendar-days"></i> Events</a>
+                                    <a href="{{ url_for('main.news_events') }}" role="menuitem"><i class="fas fa-bullhorn"></i> Announcements</a>
+                                </div>
+                                <div class="mega-col">
+                                    <a href="{{ url_for('main.events') }}?type=workshop" role="menuitem"><i class="fas fa-chalkboard"></i> Workshops</a>
+                                    <a href="{{ url_for('main.gallery') }}" role="menuitem"><i class="fas fa-images"></i> Gallery</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="premium-menu-item has-dropdown" role="none">
+                        <button class="premium-nav-link premium-dropdown-toggle {% if request.endpoint == 'main.contact' %}is-active{% endif %}"
+                                type="button" aria-expanded="false" data-dropdown="contact">
+                            Contact <i class="fas fa-chevron-down ms-1 dropdown-chevron" aria-hidden="true"></i>
+                        </button>
+                        <div class="premium-dropdown" id="dropdown-contact" role="menu">
+                            <a href="{{ url_for('main.contact') }}" role="menuitem"><i class="fas fa-envelope"></i> Contact Us</a>
+                            <a href="{{ url_for('main.contact') }}#map" role="menuitem"><i class="fas fa-map-location-dot"></i> Location Map</a>
+                            <a href="{{ url_for('main.contact') }}#support" role="menuitem"><i class="fas fa-headset"></i> Support Desk</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Right actions -->
+            <div class="premium-nav-actions d-none d-xl-flex align-items-center gap-2">
+                <button type="button" class="premium-icon-btn" id="navSearchBtn" aria-label="Open search" title="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <!-- Mobile toggle -->
+            <button class="premium-hamburger d-xl-none" type="button" id="mobileMenuBtn"
+                    aria-label="Open menu" aria-expanded="false" aria-controls="mobileNavDrawer">
+                <span class="hamburger-box">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </span>
+            </button>
+        </div>
+    </nav>
+</header>
+
+<!-- Mobile drawer -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay" aria-hidden="true"></div>
+<aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true" aria-label="Mobile navigation">
+    <div class="mobile-nav-header">
+        <a href="{{ url_for('main.index') }}" class="premium-brand">
+            <div class="premium-brand-icon premium-brand-icon--logo">
+                {% include 'includes/brand_logo.html' %}
+            </div>
+            <span class="premium-brand-name">Ridge School</span>
+        </a>
+        <button type="button" class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <nav class="mobile-nav-body">
+        <a class="mobile-nav-link" href="{{ url_for('main.index') }}">Home</a>
+
+        <div class="mobile-accordion">
+            <button class="mobile-accordion-btn" type="button" aria-expanded="false">About <i class="fas fa-chevron-down"></i></button>
+            <div class="mobile-accordion-panel">
+                <a href="{{ url_for('main.about') }}#history">History</a>
+                <a href="{{ url_for('main.about') }}#mission">Mission &amp; Vision</a>
+                <a href="{{ url_for('main.about') }}#leadership">Leadership</a>
+                <a href="{{ url_for('main.about') }}#accreditation">Accreditation</a>
+                <a href="{{ url_for('main.about') }}#partners">Partner Hospitals</a>
+            </div>
+        </div>
+
+        <div class="mobile-accordion">
+            <button class="mobile-accordion-btn" type="button" aria-expanded="false">Programmes <i class="fas fa-chevron-down"></i></button>
+            <div class="mobile-accordion-panel">
+                <a href="{{ url_for('main.programmes') }}">BSc in Anaesthesia</a>
+                <a href="{{ url_for('main.clinical_training') }}">Clinical Training</a>
+                <a href="{{ url_for('main.programmes') }}#curriculum">Curriculum</a>
+                <a href="{{ url_for('main.programmes') }}#requirements">Entry Requirements</a>
+                <a href="{{ library_url }}" {% include 'includes/external_link_attrs.html' %}>Library</a>
+            </div>
+        </div>
+
+        <div class="mobile-accordion">
+            <button class="mobile-accordion-btn" type="button" aria-expanded="false">Admissions <i class="fas fa-chevron-down"></i></button>
+            <div class="mobile-accordion-panel">
+                <a href="{{ url_for('main.admissions') }}">Admissions</a>
+                <a href="{{ url_for('main.admissions') }}#requirements">Requirements</a>
+                <a href="{{ url_for('main.admissions') }}#fees">Tuition &amp; Fees</a>
+                <a href="{{ url_for('main.brochure') }}">Download Brochure</a>
+            </div>
+        </div>
+
+        <a class="mobile-nav-link mobile-nav-link-portal"
+           href="{{ student_portal_url }}" {% include 'includes/external_link_attrs.html' %}>
+            <i class="fas fa-user-graduate me-2"></i> Student Portal
+        </a>
+
+        <div class="mobile-accordion">
+            <button class="mobile-accordion-btn" type="button" aria-expanded="false">News &amp; Events <i class="fas fa-chevron-down"></i></button>
+            <div class="mobile-accordion-panel">
+                <a href="{{ url_for('main.news_list') }}">News</a>
+                <a href="{{ url_for('main.events') }}">Events</a>
+                <a href="{{ url_for('main.news_events') }}">Announcements</a>
+                <a href="{{ url_for('main.gallery') }}">Gallery</a>
+            </div>
+        </div>
+
+        <div class="mobile-accordion">
+            <button class="mobile-accordion-btn" type="button" aria-expanded="false">Contact <i class="fas fa-chevron-down"></i></button>
+            <div class="mobile-accordion-panel">
+                <a href="{{ url_for('main.contact') }}">Contact Us</a>
+                <a href="{{ url_for('main.contact') }}#map">Location Map</a>
+                <a href="{{ url_for('main.contact') }}#support">Support Desk</a>
+            </div>
+        </div>
+    </nav>
+    <div class="mobile-nav-footer">
+        <div class="d-flex gap-2 justify-content-center">
+            <button type="button" class="premium-icon-btn" id="mobileSearchBtn" aria-label="Search"><i class="fas fa-search"></i></button>
+        </div>
+    </div>
+</aside>
+
+<!-- Search modal -->
+<div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="searchModalTitle" aria-hidden="true">
+    <div class="search-modal-backdrop" id="searchModalBackdrop"></div>
+    <div class="search-modal-dialog">
+        <button type="button" class="search-modal-close" id="searchModalClose" aria-label="Close search"><i class="fas fa-times"></i></button>
+        <h2 id="searchModalTitle" class="h5 mb-3">Search Ridge School</h2>
+        <form action="{{ url_for('main.search') }}" method="get" role="search">
+            <div class="input-group input-group-lg">
+                <input type="search" name="q" class="form-control" placeholder="Programmes, news, announcements..." aria-label="Search query" autofocus>
+                <button class="btn btn-medical" type="submit"><i class="fas fa-search me-1"></i> Search</button>
+            </div>
+        </form>
+    </div>
+</div>

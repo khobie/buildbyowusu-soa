@@ -1,0 +1,398 @@
+:root {
+    /* Green & white theme */
+    --primary-green: #059669;
+    --primary-green-light: #10B981;
+    --primary-green-dark: #047857;
+    --medical-blue: #059669;
+    --emerald: #10B981;
+    --light-gray: #F0FDF4;
+    --soft-dark: #065f46;
+    --white: #FFFFFF;
+    --text-muted: #64748b;
+}
+
+body {
+    background-color: #ffffff;
+    color: #1f2937;
+}
+
+[data-theme="dark"] {
+    --light-gray: #1e293b;
+    --soft-dark: #f8fafc;
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .glass-card,
+[data-theme="dark"] .card {
+    background: rgba(30, 41, 59, 0.85) !important;
+    color: #e2e8f0;
+}
+
+.bg-medical { background-color: var(--medical-blue) !important; }
+.btn-medical { background: var(--medical-blue); color: white; border: none; }
+.btn-medical:hover { background: var(--primary-green-dark); color: white; }
+.btn-emerald { background: var(--emerald); color: white; border: none; }
+.btn-emerald:hover { background: #059669; color: white; }
+.text-medical { color: var(--medical-blue); }
+
+.brand-icon {
+    width: 42px; height: 42px;
+    background: var(--emerald);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; color: white;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.brand-icon--logo {
+    background: #fff;
+    padding: 4px;
+}
+
+.premium-brand-logo,
+.footer-brand-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.footer-brand-logo {
+    max-height: 48px;
+    max-width: 48px;
+}
+.brand-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; line-height: 1.1; }
+.brand-sub { font-size: 0.65rem; opacity: 0.8; }
+.brand-affiliation {
+    font-size: 0.6rem;
+    color: #10B981;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+/* UCC affiliation */
+.ucc-badge {
+    display: inline-block;
+    background: rgba(5, 150, 105, 0.1);
+    color: var(--primary-green-dark);
+    border: 1px solid rgba(5, 150, 105, 0.3);
+    padding: 0.35rem 0.85rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+.ucc-hero-badge {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #fff !important;
+}
+.ucc-affiliation-bar {
+    background: #ffffff;
+    border-top: 1px solid rgba(5, 150, 105, 0.15);
+    border-bottom: 1px solid rgba(5, 150, 105, 0.15);
+}
+[data-theme="dark"] .ucc-affiliation-bar { background: #064e3b; }
+[data-theme="dark"] .ucc-badge {
+    background: rgba(16, 185, 129, 0.2);
+    color: #6ee7b7;
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+/* Loader */
+.page-loader {
+    position: fixed; inset: 0; background: white; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.4s;
+}
+.page-loader.hidden { opacity: 0; pointer-events: none; }
+.spinner {
+    width: 48px; height: 48px;
+    border: 4px solid var(--light-gray);
+    border-top-color: var(--medical-blue);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Fixed header stack (ticker + navbar) — styles in navbar.css */
+
+/* Glass cards */
+.glass-card {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(5, 150, 105, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(5, 150, 105, 0.12);
+}
+
+/* Hero */
+.hero-section {
+    min-height: calc(100vh - var(--ticker-height) - var(--nav-height));
+    min-height: calc(100dvh - var(--ticker-height) - var(--nav-height));
+    background:
+        linear-gradient(180deg, rgba(4, 120, 87, 0.75) 0%, rgba(5, 150, 105, 0.88) 35%, rgba(4, 120, 87, 0.92) 100%),
+        url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1920&q=80') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    color: white;
+    position: relative;
+}
+.hero-badge {
+    display: inline-block;
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid var(--emerald);
+    color: var(--emerald);
+    padding: 0.35rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+.hero-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+}
+.hero-motto { font-size: 1.15rem; opacity: 0.9; max-width: 560px; }
+
+/* Stats */
+.stat-card {
+    text-align: center;
+    padding: 2rem;
+}
+.stat-number {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--medical-blue);
+}
+[data-theme="dark"] .stat-number { color: var(--emerald); }
+
+/* Section */
+.section-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--soft-dark);
+}
+.section-subtitle { color: #64748b; max-width: 600px; }
+[data-theme="dark"] .section-title { color: #f1f5f9; }
+
+/* Programme cards */
+.programme-card { overflow: hidden; }
+.programme-card .card-img-top {
+    height: 180px;
+    object-fit: cover;
+    background: linear-gradient(135deg, var(--primary-green), var(--primary-green-light));
+}
+
+/* Testimonials */
+.testimonial-card { padding: 2rem; }
+.testimonial-avatar {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--medical-blue);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1.2rem;
+}
+
+/* Footer */
+.site-footer {
+    background: linear-gradient(135deg, var(--primary-green-dark), var(--primary-green));
+}
+.footer-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.9rem; }
+.footer-links a:hover { color: #ffffff; text-decoration: underline; }
+
+/* Portal sidebar */
+.portal-sidebar {
+    background: linear-gradient(180deg, var(--primary-green-dark), var(--primary-green));
+    min-height: calc(100vh - 56px);
+    padding: 1.5rem 0;
+}
+.portal-sidebar .nav-link {
+    color: rgba(255,255,255,0.7);
+    padding: 0.65rem 1.5rem;
+    border-left: 3px solid transparent;
+}
+.portal-sidebar .nav-link:hover,
+.portal-sidebar .nav-link.active {
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+    border-left-color: #ffffff;
+}
+
+/* Dashboard widgets */
+.dash-widget {
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: white;
+}
+.dash-widget.blue { background: linear-gradient(135deg, #059669, #10B981); }
+.dash-widget.green { background: linear-gradient(135deg, #047857, #059669); }
+.dash-widget.dark { background: linear-gradient(135deg, #065f46, #047857); }
+.dash-widget.amber { background: linear-gradient(135deg, #d97706, #f59e0b); }
+
+/* CTA */
+.cta-section {
+    background: linear-gradient(135deg, var(--primary-green), var(--primary-green-light));
+    color: white;
+    border-radius: 20px;
+    padding: 4rem 2rem;
+}
+
+/* Partner logos */
+.partner-logo {
+    height: 60px;
+    display: flex; align-items: center; justify-content: center;
+    background: white;
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    color: var(--medical-blue);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+html { scroll-behavior: smooth; }
+
+/* Bootstrap overrides — green & white */
+.bg-light { background-color: #F0FDF4 !important; }
+section.bg-medical,
+.bg-medical {
+    background: linear-gradient(135deg, var(--primary-green-dark), var(--primary-green)) !important;
+}
+.badge.bg-medical { background-color: var(--primary-green) !important; }
+.badge.bg-light.text-medical { color: var(--primary-green-dark) !important; background: #fff !important; }
+.btn-outline-primary {
+    color: var(--primary-green);
+    border-color: var(--primary-green);
+}
+.btn-outline-primary:hover {
+    background: var(--primary-green);
+    border-color: var(--primary-green);
+    color: #fff;
+}
+
+/* Main navigation */
+.main-nav-links .nav-link {
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+}
+.main-nav-links .nav-link:hover,
+.main-nav-links .nav-link.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff !important;
+}
+.btn-student-portal {
+    background: var(--emerald);
+    color: #fff !important;
+    font-weight: 600;
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    white-space: nowrap;
+}
+.btn-student-portal:hover {
+    background: #059669;
+    color: #fff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+}
+@media (max-width: 991.98px) {
+    .nav-portal-actions {
+        width: 100%;
+        padding-top: 0.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .btn-student-portal { width: 100%; text-align: center; }
+}
+
+/* Auth */
+.auth-card {
+    max-width: 440px;
+    margin: 4rem auto;
+}
+
+/* Faculty photos */
+.director-photo {
+    width: 100%;
+    max-width: 420px;
+    min-height: 380px;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center top;
+    border: 4px solid #fff;
+    box-shadow: 0 12px 40px rgba(5, 150, 105, 0.15);
+}
+
+.director-photo--compact {
+    max-width: 360px;
+    min-height: 340px;
+}
+
+.faculty-photo {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.director-welcome-text {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #374151;
+}
+
+.staff-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    color: #fff;
+}
+
+.staff-avatar-admin {
+    background: linear-gradient(135deg, #047857, #059669);
+}
+
+.staff-avatar-academic {
+    background: linear-gradient(135deg, #059669, #10B981);
+}
+
+.staff-card:hover {
+    transform: translateY(-3px);
+    transition: transform 0.25s ease;
+}
+
+.director-welcome-text p:first-of-type::first-letter {
+    font-size: 2.5rem;
+    font-weight: 700;
+    float: left;
+    line-height: 1;
+    padding-right: 0.5rem;
+    color: var(--primary-green);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ID Card */
+.id-card-preview {
+    max-width: 380px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}

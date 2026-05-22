@@ -1,0 +1,7 @@
+{% extends "student/dashboard.html" %}
+{% block portal_content %}<h2>Clinical Postings</h2>
+{% for p in postings %}<div class="glass-card p-4 mb-3 mt-3"><div class="d-flex justify-content-between"><h5>{{ p.hospital_name }}</h5><span class="badge bg-{% if p.status == 'active' %}success{% else %}secondary{% endif %}">{{ p.status }}</span></div>
+<p><i class="fas fa-hospital me-1"></i>{{ p.department_unit }} · {{ p.posting_type|upper }}</p>
+<p class="small text-muted">{{ p.start_date }} to {{ p.end_date }}{% if p.supervisor %} · Supervisor: {{ p.supervisor.user.full_name }}{% endif %}</p></div>
+{% else %}<p class="text-muted mt-3">No clinical postings assigned.</p>{% endfor %}
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Contact — {{ school_name }}{% endblock %}
+{% block content %}
+<section class="py-5 bg-medical text-white">
+    <div class="container py-4 text-center">
+        <h1 class="display-5 fw-bold" data-aos="fade-up">Contact Us</h1>
+        <p class="lead opacity-75 mb-0">{{ school_affiliation_short }}</p>
+    </div>
+</section>
+<section class="py-5" id="support">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-5" data-aos="fade-right">
+                <div class="glass-card p-4 h-100">
+                    <h4 class="text-medical mb-4"><i class="fas fa-headset me-2"></i>Support Desk</h4>
+                    <p class="mb-3"><strong>Admissions:</strong><br>admissions@ridgeanaesthesia.edu</p>
+                    <p class="mb-3"><strong>Student Support:</strong><br>support@ridgeanaesthesia.edu</p>
+                    <p class="mb-3"><strong>Phone:</strong><br>+233 30 000 0000</p>
+                    <p class="mb-0"><strong>Hours:</strong><br>Mon–Fri, 8:00 AM – 5:00 PM GMT</p>
+                </div>
+            </div>
+            <div class="col-lg-7" data-aos="fade-left">
+                <div class="glass-card p-4">
+                    <h4 class="mb-3">Send a Message</h4>
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6"><label class="form-label">Name</label><input type="text" class="form-control" required></div>
+                            <div class="col-md-6"><label class="form-label">Email</label><input type="email" class="form-control" required></div>
+                            <div class="col-12"><label class="form-label">Subject</label><input type="text" class="form-control"></div>
+                            <div class="col-12"><label class="form-label">Message</label><textarea class="form-control" rows="4" required></textarea></div>
+                            <div class="col-12"><button type="submit" class="btn btn-medical">Submit Enquiry</button></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5 bg-light" id="map">
+    <div class="container">
+        <h2 class="section-title text-center mb-4">Location</h2>
+        <div class="glass-card overflow-hidden">
+            <div class="ratio ratio-21x9 bg-medical d-flex align-items-center justify-content-center text-white">
+                <div class="text-center p-5">
+                    <i class="fas fa-map-marker-alt fa-3x mb-3"></i>
+                    <h5>Ridge Medical Campus</h5>
+                    <p class="mb-0 opacity-75">Accra, Ghana</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

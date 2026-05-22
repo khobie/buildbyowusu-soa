@@ -1,0 +1,6 @@
+{% extends "admin/dashboard.html" %}
+{% block portal_content %}<div class="row g-4"><div class="col-lg-5"><div class="glass-card p-4"><h5>Upload Result</h5><form method="POST">{{ form.hidden_tag() }}
+{% for field in form %}{% if field.type != 'CSRFToken' %}<div class="mb-2"><label>{{ field.label.text }}</label>{{ field(class="form-control") }}</div>{% endif %}{% endfor %}{{ form.submit(class="btn btn-medical") }}</form></div></div>
+<div class="col-lg-7"><div class="glass-card p-4"><table class="table table-sm"><thead><tr><th>Student</th><th>Grade</th><th>Total</th></tr></thead>
+<tbody>{% for r in results %}<tr><td>{{ r.student.student_id }}</td><td>{{ r.grade }}</td><td>{{ r.total_score }}</td></tr>{% endfor %}</tbody></table></div></div></div>
+{% endblock %}

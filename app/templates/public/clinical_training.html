@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Clinical Training — {{ school_name }}{% endblock %}
+{% block content %}
+<section class="py-5 bg-medical text-white"><div class="container py-4 text-center"><h1>Clinical Training Module</h1></div></section>
+<section class="py-5"><div class="container"><div class="row g-4">
+{% for icon, title, desc in [
+    ('fa-procedures', 'Theatre Rotations', 'Supervised sessions in general, cardiac, and neuro anaesthesia.'),
+    ('fa-heartbeat', 'ICU Postings', 'Critical care exposure with intensivist supervision.'),
+    ('fa-bed', 'Recovery Unit', 'Post-anaesthesia care and pain management.'),
+    ('fa-clipboard-check', 'Attendance Tracking', 'Digital attendance logging via the student portal.'),
+] %}
+<div class="col-md-6 col-lg-3" data-aos="fade-up"><div class="glass-card p-4 text-center h-100"><i class="fas {{ icon }} fa-2x text-medical mb-3"></i><h5>{{ title }}</h5><p class="small text-muted">{{ desc }}</p></div></div>
+{% endfor %}
+</div></div></section>
+{% endblock %}

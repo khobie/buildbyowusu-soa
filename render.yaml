@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: ridge-anaesthesia
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn run:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: FLASK_CONFIG
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ridge-db
+          property: connectionString
+
+databases:
+  - name: ridge-db
+    plan: free

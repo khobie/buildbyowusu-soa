@@ -1,0 +1,45 @@
+{% extends "portal_base.html" %}
+{% block sidebar %}
+<ul class="nav flex-column">
+    <li class="nav-item"><a class="nav-link active" href="{{ url_for('admin.dashboard') }}"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
+    {% if current_user.is_admin() %}
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.students') }}"><i class="fas fa-user-graduate me-2"></i>Students</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.lecturers') }}"><i class="fas fa-chalkboard-teacher me-2"></i>Lecturers</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.applications') }}"><i class="fas fa-file-alt me-2"></i>Applications</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.manage_departments') }}"><i class="fas fa-building me-2"></i>Departments</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.manage_programmes') }}"><i class="fas fa-book me-2"></i>Programmes</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.manage_clinical') }}"><i class="fas fa-hospital me-2"></i>Clinical</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.reports') }}"><i class="fas fa-chart-pie me-2"></i>Reports</a></li>
+    {% endif %}
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.manage_announcements') }}"><i class="fas fa-bullhorn me-2"></i>Announcements</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.manage_results') }}"><i class="fas fa-chart-bar me-2"></i>Results</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.manage_news') }}"><i class="fas fa-newspaper me-2"></i>News</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.manage_events') }}"><i class="fas fa-calendar me-2"></i>Events</a></li>
+</ul>
+{% endblock %}
+{% block portal_content %}
+<h2 class="mb-4">Admin Dashboard</h2>
+<div class="row g-3 mb-4">
+    <div class="col-6 col-lg"><div class="dash-widget blue"><h2>{{ stats.students }}</h2><p class="mb-0">Students</p></div></div>
+    <div class="col-6 col-lg"><div class="dash-widget green"><h2>{{ stats.lecturers }}</h2><p class="mb-0">Lecturers</p></div></div>
+    <div class="col-6 col-lg"><div class="dash-widget amber"><h2>{{ stats.applications }}</h2><p class="mb-0">Pending Apps</p></div></div>
+    <div class="col-6 col-lg"><div class="dash-widget dark"><h2>{{ stats.announcements }}</h2><p class="mb-0">Announcements</p></div></div>
+</div>
+<div class="row g-4">
+    <div class="col-lg-6"><div class="glass-card p-4"><h5>Recent Applications</h5>
+        <table class="table table-sm">{% for a in recent_apps %}<tr><td>{{ a.tracking_id }}</td><td>{{ a.first_name }} {{ a.last_name }}</td><td><span class="badge bg-warning">{{ a.status }}</span></td></tr>{% else %}<tr><td colspan="3" class="text-muted">None</td></tr>{% endfor %}</table>
+    </div></div>
+    <div class="col-lg-6"><div class="glass-card p-4"><h5>Analytics</h5><canvas id="dashboardChart" height="200"></canvas></div></div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+fetch('{{ url_for("api.stats") }}').then(r=>r.json()).then(d=>{
+    new Chart(document.getElementById('dashboardChart'),{type:'doughnut',data:{
+        labels:['Students','Lecturers','Pending Apps','Postings'],
+        datasets:[{data:[d.students,d.lecturers,d.pending_applications,d.active_postings],
+        backgroundColor:['#059669','#10B981','#34d399','#047857']}]},options:{responsive:true}});
+});
+</script>
+{% endblock %}

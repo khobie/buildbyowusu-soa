@@ -1,0 +1,9 @@
+{% extends "student/dashboard.html" %}
+{% block portal_content %}<h2>Assignments</h2>
+<div class="glass-card p-4 mt-3"><table class="table"><thead><tr><th>Title</th><th>Due</th><th>Status</th><th></th></tr></thead>
+<tbody>{% for a in assignments %}{% set sub = submissions.get(a.id) %}
+<tr><td>{{ a.title }}</td><td>{{ a.due_date.strftime('%d %b %Y') if a.due_date else 'TBA' }}</td>
+<td>{% if sub %}<span class="badge bg-success">Submitted</span>{% else %}<span class="badge bg-warning">Pending</span>{% endif %}</td>
+<td>{% if not sub %}<a href="{{ url_for('student.submit_assignment', id=a.id) }}" class="btn btn-sm btn-medical">Submit</a>{% endif %}</td></tr>
+{% else %}<tr><td colspan="4" class="text-muted">No assignments.</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

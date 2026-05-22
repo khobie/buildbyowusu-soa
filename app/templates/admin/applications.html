@@ -1,0 +1,8 @@
+{% extends "admin/dashboard.html" %}
+{% block portal_content %}
+<h2>Applications <span class="badge bg-warning">{{ status }}</span></h2>
+<div class="glass-card p-4 mt-3"><table class="table"><thead><tr><th>Tracking</th><th>Name</th><th>Programme</th><th>Status</th><th>Actions</th></tr></thead>
+<tbody>{% for a in applications %}<tr><td><code>{{ a.tracking_id }}</code></td><td>{{ a.first_name }} {{ a.last_name }}</td><td>{{ a.programme.name if a.programme else '' }}</td><td>{{ a.status }}</td>
+<td>{% if a.status == 'pending' %}<a href="{{ url_for('admin.application_action', id=a.id, action='approve') }}" class="btn btn-sm btn-success">Approve</a>
+<a href="{{ url_for('admin.application_action', id=a.id, action='reject') }}" class="btn btn-sm btn-danger">Reject</a>{% endif %}</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

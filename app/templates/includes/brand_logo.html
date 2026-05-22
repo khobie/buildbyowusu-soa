@@ -1,0 +1,4 @@
+{# School logo — uses site_images.logo from IMAGES/logos #}
+<img src="{{ url_for('static', filename=site_images.logo) }}"
+     alt="{{ school_name }} logo"
+     class="premium-brand-logo{% if brand_logo_class %} {{ brand_logo_class }}{% endif %}">

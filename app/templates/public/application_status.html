@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="py-5"><div class="container"><div class="glass-card p-5 mx-auto" style="max-width:600px">
+    <h3>Application Status</h3>
+    <table class="table mt-4">
+        <tr><th>Tracking ID</th><td><code>{{ application.tracking_id }}</code></td></tr>
+        <tr><th>Name</th><td>{{ application.first_name }} {{ application.last_name }}</td></tr>
+        <tr><th>Programme</th><td>{{ application.programme.name if application.programme else 'N/A' }}</td></tr>
+        <tr><th>Status</th><td><span class="badge bg-{% if application.status == 'approve' %}success{% elif application.status == 'reject' %}danger{% else %}warning{% endif %}">{{ application.status|title }}</span></td></tr>
+        <tr><th>Submitted</th><td>{{ application.submitted_at.strftime('%d %b %Y') }}</td></tr>
+    </table>
+    <a href="{{ url_for('main.admissions') }}" class="btn btn-medical">Back</a>
+</div></div></section>
+{% endblock %}

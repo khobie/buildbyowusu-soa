@@ -1,0 +1,4 @@
+{% extends "student/dashboard.html" %}
+{% block portal_content %}<h2>Announcements</h2>
+{% for a in announcements %}<div class="glass-card p-4 mb-3 mt-3"><span class="badge bg-medical">{{ a.category }}</span><h5 class="mt-2">{{ a.title }}</h5><p>{{ a.content }}</p><small class="text-muted">{{ a.created_at.strftime('%d %b %Y') }}</small></div>{% else %}<p class="text-muted mt-3">No announcements.</p>{% endfor %}
+{% endblock %}

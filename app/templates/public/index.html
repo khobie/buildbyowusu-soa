@@ -1,0 +1,386 @@
+{% extends "base.html" %}
+{% block title %}Home — {{ school_name }}{% endblock %}
+{% block body_class %}has-hero-nav{% endblock %}
+{% block extra_head %}
+<link href="{{ url_for('static', filename='css/home.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+{# ——— Hero ——— #}
+<section class="home-hero" aria-label="Welcome">
+    <div class="home-hero__bg" aria-hidden="true"
+         style="background-image: linear-gradient(105deg, rgba(4, 78, 56, 0.92) 0%, rgba(5, 150, 105, 0.82) 45%, rgba(4, 120, 87, 0.75) 100%), url('{{ url_for('static', filename=site_images.hero) }}');"></div>
+    <div class="container home-hero__content">
+        <div class="row align-items-center">
+            <div class="col-lg-8 col-xl-7" data-aos="fade-up">
+                <span class="section-eyebrow section-eyebrow--light">Ridge School of Anaesthesia</span>
+                <h1 class="home-hero__title">Training Excellence in <span class="text-white">Anaesthesia</span></h1>
+                <p class="home-hero__motto"><em>"{{ school_motto }}"</em></p>
+                <p class="home-hero__lead mb-4">
+                    A specialist school dedicated to the BSc in Anaesthesia — combining rigorous academics,
+                    immersive hospital rotations, and hands-on simulation training.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="{{ url_for('main.admissions') }}" class="btn btn-emerald btn-lg px-4">
+                        <i class="fas fa-paper-plane me-2"></i>Apply Now
+                    </a>
+                    <a href="{{ student_portal_url }}" class="btn btn-outline-light btn-lg px-4" {% include 'includes/external_link_attrs.html' %}>
+                        <i class="fas fa-user-graduate me-2"></i>Student Portal
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# ——— Quick links ——— #}
+<section class="home-quick-nav" aria-label="Quick navigation">
+    <div class="container">
+        <div class="home-quick-nav__grid home-quick-nav__grid--6">
+            <a href="{{ url_for('main.programmes') }}" class="home-quick-card" data-aos="fade-up" data-aos-delay="0">
+                <span class="home-quick-card__icon"><i class="fas fa-graduation-cap"></i></span>
+                <span class="home-quick-card__label">Programmes</span>
+            </a>
+            <a href="{{ url_for('main.admissions') }}" class="home-quick-card" data-aos="fade-up" data-aos-delay="50">
+                <span class="home-quick-card__icon"><i class="fas fa-door-open"></i></span>
+                <span class="home-quick-card__label">Admissions</span>
+            </a>
+            <a href="{{ library_url }}" class="home-quick-card" data-aos="fade-up" data-aos-delay="100" {% include 'includes/external_link_attrs.html' %}>
+                <span class="home-quick-card__icon"><i class="fas fa-book"></i></span>
+                <span class="home-quick-card__label">Library</span>
+            </a>
+            <a href="{{ student_portal_url }}" class="home-quick-card" data-aos="fade-up" data-aos-delay="150" {% include 'includes/external_link_attrs.html' %}>
+                <span class="home-quick-card__icon"><i class="fas fa-user-graduate"></i></span>
+                <span class="home-quick-card__label">Student Portal</span>
+            </a>
+            <a href="{{ url_for('main.clinical_training') }}" class="home-quick-card" data-aos="fade-up" data-aos-delay="200">
+                <span class="home-quick-card__icon"><i class="fas fa-procedures"></i></span>
+                <span class="home-quick-card__label">Clinical Training</span>
+            </a>
+            <a href="{{ url_for('main.about') }}" class="home-quick-card" data-aos="fade-up" data-aos-delay="250">
+                <span class="home-quick-card__icon"><i class="fas fa-school"></i></span>
+                <span class="home-quick-card__label">About Us</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+{# ——— Director's welcome ——— #}
+<section class="home-section home-director" id="director-preview">
+    <div class="container">
+        <div class="home-section-header" data-aos="fade-up">
+            <span class="section-eyebrow">Leadership</span>
+            <h2 class="section-title mb-2">Director's Welcome</h2>
+            <p class="section-subtitle mx-auto">A message from {{ director_name }}, {{ director_title }}</p>
+        </div>
+        <div class="home-director__card">
+            <div class="row align-items-center g-4">
+                <div class="col-md-5 col-lg-4 text-center" data-aos="fade-right">
+                    <img src="{{ url_for('static', filename=site_images.director) }}"
+                         alt="{{ director_name }}"
+                         class="director-photo director-photo--compact rounded-4">
+                    <h5 class="text-medical mt-3 mb-0">{{ director_name }}</h5>
+                    <p class="text-muted small">{{ director_title }}</p>
+                </div>
+                <div class="col-md-7 col-lg-8" data-aos="fade-left">
+                    <p class="lead text-muted mb-3">{{ director_welcome.split('\n\n')[0] }}</p>
+                    <a href="{{ url_for('main.about') }}#director-welcome" class="btn btn-medical">
+                        Read Full Message <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# ——— About the school ——— #}
+<section class="home-section home-section--alt">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 order-lg-2" data-aos="fade-left">
+                <div class="home-about__image-wrap">
+                    <img src="{{ url_for('static', filename=site_images.about) }}"
+                         alt="Classroom training at Ridge School of Anaesthesia"
+                         loading="lazy">
+                    <span class="home-about__badge"><i class="fas fa-heartbeat me-1"></i> Clinical Training</span>
+                </div>
+            </div>
+            <div class="col-lg-6 order-lg-1" data-aos="fade-right">
+                <span class="section-eyebrow">Who We Are</span>
+                <h2 class="section-title">About the School</h2>
+                <p class="section-subtitle">
+                    Ridge School of Anaesthesia is a premier medical training institution dedicated to producing
+                    competent, compassionate anaesthesia practitioners.
+                </p>
+                <p class="text-muted">
+                    Founded in 2008, we combine rigorous academic curricula with hands-on clinical experience
+                    across Ghana's leading hospitals. Our graduates serve in theatres, ICUs, and critical care
+                    units nationwide.
+                </p>
+                <a href="{{ url_for('main.about') }}" class="btn btn-medical mt-2">
+                    Learn More <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# ——— Why choose us ——— #}
+<section class="home-section">
+    <div class="container">
+        <div class="home-section-header" data-aos="fade-up">
+            <span class="section-eyebrow">Our Strengths</span>
+            <h2 class="section-title mb-2">Why Choose Ridge?</h2>
+            <p class="section-subtitle mx-auto">
+                World-class training backed by hospital partnerships, simulation facilities, and expert faculty.
+            </p>
+        </div>
+        <div class="row g-4">
+            {% for icon, title, desc in [
+                ('fa-hospital', 'Partner Hospitals', 'Clinical rotations at Ridge Medical Centre, Korle Bu, 37 Military, and KATH.'),
+                ('fa-flask', 'Simulation Labs', 'High-fidelity anaesthesia simulation centre with modern manikins and equipment.'),
+                ('fa-chalkboard-teacher', 'Expert Faculty', 'Consultant anaesthetists with subspecialty training and decades of experience.'),
+                ('fa-procedures', 'Theatre & ICU Training', 'Structured rotations in operating theatres, ICU, and recovery units.'),
+            ] %}
+            <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
+                <div class="home-feature-card">
+                    <div class="home-feature-card__icon"><i class="fas {{ icon }}"></i></div>
+                    <h5 class="mb-2">{{ title }}</h5>
+                    <p class="text-muted small mb-0">{{ desc }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{# ——— Programme ——— #}
+<section class="home-section home-programme-showcase">
+    <div class="container">
+        <div class="row align-items-end mb-4 g-3">
+            <div class="col-lg-8" data-aos="fade-up">
+                <span class="section-eyebrow">Academics</span>
+                <h2 class="section-title mb-1">Our Programme</h2>
+                <p class="section-subtitle mb-0">BSc in Anaesthesia — your pathway to a rewarding clinical career.</p>
+            </div>
+            <div class="col-lg-4 text-lg-end" data-aos="fade-up">
+                <a href="{{ url_for('main.programmes') }}" class="btn btn-outline-primary">View Programme Details</a>
+            </div>
+        </div>
+        <div class="row g-4">
+            {% for prog in programmes %}
+            <div class="col-12" data-aos="fade-up">
+                <div class="card home-programme-card glass-card">
+                    <div class="row g-0">
+                        <div class="col-md-5 col-lg-4">
+                            <div class="home-programme-card__visual h-100">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-lg-8">
+                            <div class="home-programme-card__body">
+                                <span class="badge bg-medical mb-2">{{ prog.level }}</span>
+                                <h3 class="h4 mb-2">{{ prog.name }}</h3>
+                                <p class="text-muted mb-3">{{ prog.description }}</p>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <a href="{{ url_for('main.programme_detail', id=prog.id) }}" class="btn btn-medical">Programme Details</a>
+                                    <a href="{{ url_for('main.admissions') }}" class="btn btn-outline-primary">How to Apply</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-12"><p class="text-muted text-center">Programme information coming soon.</p></div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{# ——— Stats ——— #}
+<section class="home-stats" aria-label="School statistics">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-6 col-lg-3" data-aos="fade-up">
+                <div class="home-stat-item">
+                    <div class="home-stat-item__number" data-count="1200">0</div>
+                    <p class="home-stat-item__label">Graduates</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="50">
+                <div class="home-stat-item">
+                    <div class="home-stat-item__number" data-count="17">0</div>
+                    <p class="home-stat-item__label">Years of Excellence</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="home-stat-item">
+                    <div class="home-stat-item__number" data-count="4">0</div>
+                    <p class="home-stat-item__label">Partner Hospitals</p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="150">
+                <div class="home-stat-item">
+                    <div class="home-stat-item__number" data-count="95">0</div>
+                    <p class="home-stat-item__label">% Employment Rate</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# ——— Clinical training ——— #}
+<section class="home-section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <span class="section-eyebrow">Hands-On Learning</span>
+                <h2 class="section-title">Clinical Training</h2>
+                <p class="text-muted">
+                    Structured rotations across ICU, operating theatres, recovery units, and specialty departments
+                    — with supervised sessions and attendance tracking.
+                </p>
+                <ul class="list-unstyled home-check-list mb-4">
+                    <li><i class="fas fa-check-circle"></i><span>Supervised theatre sessions</span></li>
+                    <li><i class="fas fa-check-circle"></i><span>ICU posting schedules</span></li>
+                    <li><i class="fas fa-check-circle"></i><span>Attendance &amp; supervisor assignments</span></li>
+                    <li><i class="fas fa-check-circle"></i><span>Partner hospital rotations</span></li>
+                </ul>
+                <a href="{{ url_for('main.clinical_training') }}" class="btn btn-emerald">
+                    Explore Clinical Training <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <img src="{{ url_for('static', filename=site_images.clinical) }}"
+                     alt="Clinical anaesthesia training — operating theatre"
+                     class="home-clinical__img"
+                     loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+{# ——— News & announcements ——— #}
+<section class="home-section home-section--alt">
+    <div class="container">
+        <div class="home-section-header" data-aos="fade-up">
+            <span class="section-eyebrow">Stay Informed</span>
+            <h2 class="section-title mb-2">News &amp; Announcements</h2>
+            <p class="section-subtitle mx-auto">Latest updates from the school.</p>
+        </div>
+        <div class="home-news-grid">
+            <div data-aos="fade-up">
+                <h5 class="text-medical mb-3"><i class="fas fa-newspaper me-2"></i>Latest News</h5>
+                <div class="row g-3">
+                    {% for article in news %}
+                    <div class="col-12">
+                        <article class="home-news-card">
+                            <span class="badge bg-emerald mb-2" style="background:#10B981">News</span>
+                            <h6 class="mb-2">{{ article.title }}</h6>
+                            <p class="small text-muted mb-2">{{ article.summary or article.content[:120] }}…</p>
+                            <a href="{{ url_for('main.news_detail', slug=article.slug) }}" class="small fw-semibold text-medical text-decoration-none">
+                                Read more <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </article>
+                    </div>
+                    {% else %}
+                    <p class="text-muted small">No news articles yet.</p>
+                    {% endfor %}
+                </div>
+                <a href="{{ url_for('main.news_list') }}" class="btn btn-sm btn-outline-primary mt-3">All News</a>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="100">
+                <h5 class="text-medical mb-3"><i class="fas fa-bullhorn me-2"></i>Announcements</h5>
+                <div class="home-news-card">
+                    <div class="home-announcement-list">
+                        {% for ann in announcements[:4] %}
+                        <div class="home-announcement-item">
+                            <span class="badge bg-medical mb-1">Announcement</span>
+                            <h6 class="mb-1">{{ ann.title }}</h6>
+                            <p class="small text-muted mb-0">{{ ann.content[:100] }}…</p>
+                        </div>
+                        {% else %}
+                        <p class="text-muted small mb-0">No announcements at this time.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <a href="{{ url_for('main.news_events') }}" class="btn btn-sm btn-outline-primary mt-3">View All</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# ——— Testimonials ——— #}
+<section class="home-section home-testimonials">
+    <div class="container">
+        <div class="home-section-header" data-aos="fade-up">
+            <span class="section-eyebrow">Alumni Voices</span>
+            <h2 class="section-title mb-2">What Our Graduates Say</h2>
+        </div>
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-aos="fade-up">
+            <div class="carousel-inner">
+                {% for t in testimonials %}
+                <div class="carousel-item {% if loop.first %}active{% endif %}">
+                    <div class="glass-card home-testimonial-card text-center">
+                        <div class="testimonial-avatar mx-auto mb-3">{{ t.name[0] }}</div>
+                        <p class="lead fst-italic mb-3">"{{ t.content }}"</p>
+                        <h6 class="mb-0">{{ t.name }}</h6>
+                        <small class="text-muted">{{ t.role }}</small>
+                        <div class="text-warning mt-2">
+                            {% for i in range(t.rating) %}<i class="fas fa-star"></i>{% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% if testimonials|length > 1 %}
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev" aria-label="Previous">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next" aria-label="Next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{# ——— Partner hospitals ——— #}
+<section class="home-section">
+    <div class="container">
+        <div class="home-section-header" data-aos="fade-up">
+            <span class="section-eyebrow">Clinical Network</span>
+            <h2 class="section-title mb-2">Partner Hospitals</h2>
+            <p class="section-subtitle mx-auto">Where our students train and grow their clinical skills.</p>
+        </div>
+        <div class="home-partners__grid">
+            {% for p in partners %}
+            <div class="home-partner-tile" data-aos="zoom-in" data-aos-delay="{{ loop.index0 * 50 }}">
+                <i class="fas fa-hospital text-medical fa-lg mb-2 d-block"></i>
+                <p class="home-partner-tile__name mb-0">{{ p.name }}</p>
+                <small class="text-muted">{{ p.location }}</small>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{# ——— Call to action ——— #}
+<section class="home-section pb-5">
+    <div class="container">
+        <div class="home-cta" data-aos="zoom-in">
+            <h2 class="h3">Begin Your Journey in Anaesthesia</h2>
+            <p class="mb-4">
+                Join over a thousand graduates making a difference in operating theatres and critical care units across Ghana.
+            </p>
+            <div class="d-flex flex-wrap gap-3 justify-content-center">
+                <a href="{{ url_for('main.admissions') }}" class="btn btn-light btn-lg">Apply for Admission</a>
+                <a href="{{ url_for('main.brochure') }}" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-download me-1"></i>Download Brochure
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

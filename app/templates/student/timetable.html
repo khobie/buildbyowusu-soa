@@ -1,0 +1,5 @@
+{% extends "student/dashboard.html" %}
+{% block portal_content %}<h2>Timetable</h2>
+<div class="glass-card p-4 mt-3"><table class="table"><thead><tr><th>Day</th><th>Time</th><th>Course</th><th>Venue</th><th>Lecturer</th></tr></thead>
+<tbody>{% for e in entries %}<tr><td>{{ e.day_of_week }}</td><td>{{ e.start_time }} - {{ e.end_time }}</td><td>{{ e.course.title if e.course else 'TBA' }}</td><td>{{ e.venue }}</td><td>{{ e.lecturer_name }}</td></tr>{% else %}<tr><td colspan="5" class="text-muted">No timetable entries.</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

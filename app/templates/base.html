@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ridge School of Anaesthesia — Affiliated to University of Cape Coast (UCC). BSc in Anaesthesia with world-class clinical training.">
+    <meta name="keywords" content="anaesthesia school, UCC, University of Cape Coast, Ridge School, BSc in Anaesthesia, Ghana">
+    <title>{% block title %}{{ school_name }}{% endblock %}</title>
+    <link rel="icon" href="{{ url_for('static', filename=site_images.logo) }}" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: {
+                medical: '#059669', emerald: '#10B981', softdark: '#065f46', lightgray: '#F0FDF4'
+            }}}
+        }
+    </script>
+    <link href="{{ url_for('static', filename='css/navbar.css') }}" rel="stylesheet">
+    {% if csrf_token %}<meta name="csrf-token" content="{{ csrf_token() }}">{% endif %}
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="font-['Inter'] antialiased has-premium-nav nav-mode-solid {% block body_class %}{% endblock %}">
+<div id="page-loader" class="page-loader"><div class="spinner"></div></div>
+
+<header class="site-header-stack" id="siteHeaderStack" role="banner">
+    {% include 'includes/premium_navbar.html' %}
+</header>
+
+<main class="site-main" id="siteMain" role="main">
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="container mt-3 pt-2">
+    {% for category, message in messages %}
+    <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer mt-5">
+    <div class="container py-5">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <div class="brand-icon brand-icon--logo">
+                        {% with brand_logo_class='footer-brand-logo' %}{% include 'includes/brand_logo.html' %}{% endwith %}
+                    </div>
+                    <div>
+                        <h5 class="text-white mb-0">Ridge School of Anaesthesia</h5>
+                        <small class="text-white-50">{{ school_motto }}</small>
+                    </div>
+                </div>
+                <p class="text-white-50">Premier institution for anaesthesia education and clinical excellence in West Africa.</p>
+                <span class="ucc-badge mt-2"><i class="fas fa-university me-1"></i> {{ school_affiliation_short }}</span>
+            </div>
+            <div class="col-6 col-lg-2">
+                <h6 class="text-white mb-3">Quick Links</h6>
+                <ul class="list-unstyled footer-links">
+                    <li><a href="{{ url_for('main.about') }}">About Us</a></li>
+                    <li><a href="{{ url_for('main.programmes') }}">Program</a></li>
+                    <li><a href="{{ url_for('main.news_events') }}">News &amp; Events</a></li>
+                    <li><a href="{{ library_url }}" {% include 'includes/external_link_attrs.html' %}>Library</a></li>
+                    <li><a href="{{ url_for('main.admissions') }}">Admissions</a></li>
+                    <li><a href="{{ url_for('main.contact') }}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg-2">
+                <h6 class="text-white mb-3">Portals</h6>
+                <ul class="list-unstyled footer-links">
+                    <li><a href="{{ student_portal_url }}" {% include 'includes/external_link_attrs.html' %}>Student Portal</a></li>
+                    <li><a href="{{ url_for('auth.login') }}">Staff / Admin Login</a></li>
+                    <li><a href="{{ url_for('main.brochure') }}">Download Brochure</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <h6 class="text-white mb-3">Contact</h6>
+                <p class="text-white-50 mb-1"><i class="fas fa-map-marker-alt me-2"></i>Ridge Medical Campus, Accra, Ghana</p>
+                <p class="text-white-50 mb-1"><i class="fas fa-phone me-2"></i>+233 30 000 0000</p>
+                <p class="text-white-50"><i class="fas fa-envelope me-2"></i>info@ridgeanaesthesia.edu</p>
+            </div>
+        </div>
+        <hr class="border-secondary my-4">
+        <p class="text-center text-white-50 mb-0">&copy; {{ current_year }} Ridge School of Anaesthesia. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

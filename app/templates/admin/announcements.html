@@ -1,0 +1,6 @@
+{% extends "admin/dashboard.html" %}
+{% block portal_content %}<div class="row g-4"><div class="col-lg-5"><div class="glass-card p-4"><h5>New Announcement</h5><form method="POST">{{ form.hidden_tag() }}
+{% for field in form %}{% if field.type not in ['CSRFToken','SubmitField','BooleanField'] %}<div class="mb-2"><label>{{ field.label.text }}</label>{{ field(class="form-control") }}</div>{% elif field.type == 'BooleanField' %}<div class="form-check mb-2">{{ field(class="form-check-input") }}<label class="form-check-label">{{ field.label.text }}</label></div>{% endif %}{% endfor %}
+{{ form.submit(class="btn btn-medical") }}</form></div></div>
+<div class="col-lg-7"><div class="glass-card p-4"><h5>Published</h5>{% for a in announcements %}<div class="border-bottom py-2"><strong>{{ a.title }}</strong> {% if a.show_ticker %}<span class="badge bg-info">Ticker</span>{% endif %}<p class="small mb-0">{{ a.content[:80] }}...</p></div>{% endfor %}</div></div></div>
+{% endblock %}

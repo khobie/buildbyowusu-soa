@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Search: {{ q }} — {{ school_name }}{% endblock %}
+{% block content %}
+<section class="py-5"><div class="container">
+    <h2>Search Results for "{{ q }}"</h2>
+    {% if results.programmes %}
+    <h5 class="mt-4">Programmes</h5>
+    <ul>{% for p in results.programmes %}<li><a href="{{ url_for('main.programme_detail', id=p.id) }}">{{ p.name }}</a></li>{% endfor %}</ul>
+    {% endif %}
+    {% if results.news %}
+    <h5 class="mt-4">News</h5>
+    <ul>{% for n in results.news %}<li><a href="{{ url_for('main.news_detail', slug=n.slug) }}">{{ n.title }}</a></li>{% endfor %}</ul>
+    {% endif %}
+    {% if not results.programmes and not results.news and not results.announcements %}
+    <p class="text-muted mt-3">No results found.</p>
+    {% endif %}
+</div></section>
+{% endblock %}

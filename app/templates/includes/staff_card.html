@@ -1,0 +1,18 @@
+{# expects: member #}
+<div class="glass-card text-center p-4 h-100 staff-card">
+    {% if member.photo %}
+    <img src="{{ url_for('static', filename=member.photo) }}" alt="{{ member.name }}"
+         class="faculty-photo rounded-circle mx-auto mb-3 shadow-sm">
+    {% else %}
+    <div class="staff-avatar mx-auto mb-3 {% if member.is_administration %}staff-avatar-admin{% else %}staff-avatar-academic{% endif %}">
+        {% if member.is_administration %}
+        <i class="fas fa-briefcase"></i>
+        {% else %}
+        <i class="fas fa-user-md"></i>
+        {% endif %}
+    </div>
+    {% endif %}
+    <h6 class="mb-1">{{ member.name }}</h6>
+    <p class="text-medical fw-semibold small mb-1">{{ member.title }}</p>
+    <small class="text-muted d-block">{{ member.specialization }}</small>
+</div>
